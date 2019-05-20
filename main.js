@@ -2,6 +2,7 @@
 const apiUrl = "https://jsonplaceholder.typicode.com/todos"
 
 var todosIncomplete = {
+  prop: ['id'],
   data () {
     return {
       info: []
@@ -16,12 +17,12 @@ var todosIncomplete = {
                 <button class="btn btn-light"
                         type="button"
                         data-toggle="collapse"
-                        data-target="#collapseOne">
+                        @click="toggle()">
                         A fazer
                 </button>
             </div>
         
-            <div id="collapseOne" class="collapse" data-parent="#afazer">
+            <div :id="id" class="collapse" data-parent="#afazer">
                 <div class="card-body">
                     <div class="row">
                         <div v-for="todo in info" v-show="todo.completed == false && todo.userId == 1" class="col-lg-3 col-md-4 mt-4 mb-4">
@@ -41,6 +42,11 @@ var todosIncomplete = {
         </div>  
         </div>  
       `,
+      methods: {
+        toggle(){
+            $('#'+this.id).collapse('toggle')
+        }
+      },
       mounted () {
         axios
             .get( apiUrl )
@@ -50,6 +56,7 @@ var todosIncomplete = {
 }
 
 var todosComplete = {
+    props: ['id'],
     data () {
         return {
             info: []
@@ -63,12 +70,12 @@ var todosComplete = {
             <button class="btn btn-light"
                     type="button"
                     data-toggle="collapse"
-                    data-target="#collapseTwo">
+                    @click="toggle()">
                     Completos
             </button>
         </div>
 
-        <div id="collapseTwo" class="collapse" data-parent="#completos">
+        <div :id="id" class="collapse" data-parent="#completos">
             <div class="card-body">
                 <div class="row">
                     <div v-for="todo in info" v-show="todo.completed == true && todo.userId == 1" class="col-lg-3 col-md-4 mt-4 mb-4">
@@ -87,10 +94,16 @@ var todosComplete = {
         </div>
     </div>
   `,
+  methods: {
+    toggle(){
+        $('#'+this.id).collapse('toggle')
+    }
+  },
   mounted () {
     axios
         .get( apiUrl )
         .then( response => ( this.info = response.data ))
+
   }
 }
 
