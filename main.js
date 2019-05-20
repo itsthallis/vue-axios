@@ -10,10 +10,10 @@ var todosIncomplete = {
   template: 
       `
       <div class="accordion mt-4" id="afazer">
-      <div class="card">
+      <div class="card border-0">
 
             <div class="card-header" id="headingOne">
-                <button class="btn btn-link"
+                <button class="btn btn-light"
                         type="button"
                         data-toggle="collapse"
                         data-target="#collapseOne">
@@ -55,12 +55,12 @@ var todosComplete = {
             info: []
         }
     },
-    template: `
+    template:`
     <div class="accordion mt-4" id="completos">
-        <div class="card">
+        <div class="card border-0">
 
         <div class="card-header" id="headingOne">
-            <button class="btn btn-link"
+            <button class="btn btn-light"
                     type="button"
                     data-toggle="collapse"
                     data-target="#collapseTwo">
@@ -77,7 +77,7 @@ var todosComplete = {
                                 <h5 class="card-title">Id do Usuário: {{ todo.userId }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Id do todo: {{ todo.id }}</h6>
                                 <p class="card-text">Título: {{ todo.title }}</p>
-                                <p class="card-text badge badge-primary">Completo: {{ todo.completed }}</p>
+                                <p class="card-text badge badge-success">Completo: {{ todo.completed }}</p>
                             </div>
                         </div>
                     </div>
@@ -94,9 +94,6 @@ var todosComplete = {
   }
 }
 
-Vue.component(todosIncomplete, {
-    name: 'todos-incomplete'
-})
 
 new Vue({
     el: '#app',
