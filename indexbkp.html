@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Vue + Axios | Todos</title>
+</head>
+<body>
+    <div class="container mt-5" id="app">
+        
+        <h1>Todos (Lista de tarefas)</h1>
+        
+        <!-- A fazer -->
+        <div class="accordion mt-4" id="afazer">
+            <div class="card">
+
+                <div class="card-header" id="headingOne">
+                    <button class="btn btn-link"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#collapseOne">
+                            A fazer
+                    </button>
+                </div>
+            
+                <div id="collapseOne" class="collapse" data-parent="#afazer">
+                    <div class="card-body">
+                        <div class="row">
+                            <div v-for="todo in info" v-show="todo.completed == false && todo.userId == 1" class="col-lg-3 col-md-4 mt-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Id do Usuário: {{ todo.userId }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Id do todo: {{ todo.id }}</h6>
+                                        <p class="card-text">Título: {{ todo.title }}</p>
+                                        <p class="card-text badge badge-secondary">Completo: {{ todo.completed }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Completos -->
+
+        <div class="accordion mt-4" id="completos">
+            <div class="card">
+
+                <div class="card-header" id="headingOne">
+                    <button class="btn btn-link"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#collapseTwo">
+                            Completos
+                    </button>
+                </div>
+
+                <div id="collapseTwo" class="collapse" data-parent="#completos">
+                    <div class="card-body">
+                        <div class="row">
+                            <div v-for="todo in info" v-show="todo.completed == true && todo.userId == 1" class="col-lg-3 col-md-4 mt-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Id do Usuário: {{ todo.userId }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Id do todo: {{ todo.id }}</h6>
+                                        <p class="card-text">Título: {{ todo.title }}</p>
+                                        <p class="card-text badge badge-primary">Completo: {{ todo.completed }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

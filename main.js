@@ -1,18 +1,107 @@
+
+const apiUrl = "https://jsonplaceholder.typicode.com/todos"
+
+var todosIncomplete = {
+  data () {
+    return {
+      info: []
+    }
+  },
+  template: 
+      `
+      <div class="accordion mt-4" id="afazer">
+      <div class="card">
+
+            <div class="card-header" id="headingOne">
+                <button class="btn btn-link"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseOne">
+                        A fazer
+                </button>
+            </div>
+        
+            <div id="collapseOne" class="collapse" data-parent="#afazer">
+                <div class="card-body">
+                    <div class="row">
+                        <div v-for="todo in info" v-show="todo.completed == false && todo.userId == 1" class="col-lg-3 col-md-4 mt-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Id do Usuário: {{ todo.userId }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Id do todo: {{ todo.id }}</h6>
+                                    <p class="card-text">Título: {{ todo.title }}</p>
+                                    <p class="card-text badge badge-secondary">Completo: {{ todo.completed }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>  
+        </div>  
+      `,
+      mounted () {
+        axios
+            .get( apiUrl )
+            .then( response => ( this.info = response.data ))
+    }
+
+}
+
+var todosComplete = {
+    data () {
+        return {
+            info: []
+        }
+    },
+    template: `
+    <div class="accordion mt-4" id="completos">
+        <div class="card">
+
+        <div class="card-header" id="headingOne">
+            <button class="btn btn-link"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseTwo">
+                    Completos
+            </button>
+        </div>
+
+        <div id="collapseTwo" class="collapse" data-parent="#completos">
+            <div class="card-body">
+                <div class="row">
+                    <div v-for="todo in info" v-show="todo.completed == true && todo.userId == 1" class="col-lg-3 col-md-4 mt-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Id do Usuário: {{ todo.userId }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Id do todo: {{ todo.id }}</h6>
+                                <p class="card-text">Título: {{ todo.title }}</p>
+                                <p class="card-text badge badge-primary">Completo: {{ todo.completed }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+  `,
+  mounted () {
+    axios
+        .get( apiUrl )
+        .then( response => ( this.info = response.data ))
+  }
+}
+
+Vue.component(todosIncomplete, {
+    name: 'todos-incomplete'
+})
+
 new Vue({
     el: '#app',
-    data () {
-      return {
-        info: null
-      }
-    },
-    mounted () {
-      axios
-        .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-        .then(response => (this.info = response.data.bpi))
-    },
-    filters: {
-      currencydecimal (value) {
-        return value.toFixed(2)
-      }
+    components: {
+      'todos-incomplete' : todosIncomplete,
+      'todos-complete' : todosComplete
     }
-  })
+})
