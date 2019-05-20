@@ -2,7 +2,7 @@
 const apiUrl = "https://jsonplaceholder.typicode.com/todos"
 
 var todosIncomplete = {
-  prop: ['id'],
+  props: ['id'],
   data () {
     return {
       info: []
